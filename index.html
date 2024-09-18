@@ -33,12 +33,21 @@
             margin-top: 10px;
         }
 
-        table {
+        /* Style tabel dengan pengguliran dan baris header yang dibekukan */
+        .table-container {
             width: 100%;
-            border-collapse: collapse;
+            max-height: 400px;
+            overflow-y: auto;
             margin-top: 20px;
             background-color: white;
             opacity: 0.9;
+            border: 1px solid #ddd;
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
         th, td {
@@ -49,6 +58,9 @@
 
         th {
             background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
 
         tr:hover {
@@ -133,15 +145,13 @@
         <h2>Link Form Peminjaman Ruangan</h2>
         <a href="https://forms.gle/U4vx26uZQQKuRW4o7" target="_blank" class="button">Mulai Pinjam</a>
     </div>
-
- i
-
+l
     <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtgaK_4U7MVMlIRJUGUa1U4rKExyTilJIBIn92HMz91eUUtjKlq3JCoftl_RcgFqiMwFT5V4zB7pEq/pubhtml" width="100%" height="600"></iframe>
 
     <!-- Search section -->
     <div class="search-container">
-        <input type="text" id="searchBox" placeholder="Cari...">
         <button type="button" id="searchButton">Search</button>
+        <input type="text" id="searchBox" placeholder="Cari...">
     </div>
 
     <!-- Filter section below search -->
@@ -153,8 +163,9 @@
             <option value="bahan">Bahan</option>
         </select>
     </div>
-    
-    <table id="dataTable">
+
+    <div class="table-container">
+        <table id="dataTable">
         <thead>
             <tr>
                 <th>Type</th>
@@ -7828,11 +7839,11 @@
                 <td>    Budi Wardoyo  </td>
                 <td>    08123319231  </td>
             </tr>
-         </tbody>
+          </tbody>
     </table>
     <p id="noResult" class="no-result" style="display: none;">Tidak ada hasil yang ditemukan.</p>
 
-    
+   
     <!-- Chart.js untuk Visualisasi Data -->
     <canvas id="inventoryChart" width="400" height="200"></canvas>
 
@@ -7866,25 +7877,25 @@
             document.getElementById('noResult').style.display = found ? 'none' : 'block';
         }
 
-// Trigger pencarian hanya dengan tombol search
+        // Trigger pencarian hanya dengan tombol search
         document.getElementById('searchButton').addEventListener('click', searchFunction);
 
         // Fungsi filter berdasarkan tipe
-document.getElementById('filterType').addEventListener('change', function() {
-    var filterValue = this.value.toLowerCase();
-    var rows = document.querySelectorAll('#dataTable tbody tr');
+        document.getElementById('filterType').addEventListener('change', function() {
+            var filterValue = this.value.toLowerCase();
+            var rows = document.querySelectorAll('#dataTable tbody tr');
 
-    rows.forEach(function(row) {
-        var typeCell = row.querySelectorAll('td')[0]; // Kolom Tipe, pastikan ini benar
-        var typeText = typeCell ? typeCell.textContent.toLowerCase().trim() : ''; // Normalisasi teks
+            rows.forEach(function(row) {
+                var typeCell = row.querySelectorAll('td')[0]; // Kolom Tipe, pastikan ini benar
+                var typeText = typeCell ? typeCell.textContent.toLowerCase().trim() : ''; // Normalisasi teks
 
-        if (filterValue === "" || typeText === filterValue) {
-            row.style.display = '';  // Tampilkan baris yang sesuai
-        } else {
-            row.style.display = 'none';  // Sembunyikan baris yang tidak sesuai
-        }
-    });
-});
+                if (filterValue === "" || typeText === filterValue) {
+                    row.style.display = '';  // Tampilkan baris yang sesuai
+                } else {
+                    row.style.display = 'none';  // Sembunyikan baris yang tidak sesuai
+                }
+            });
+        });
     </script>
 </body>
 </html>
